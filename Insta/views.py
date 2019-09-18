@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView, ListView
+from django.views.generic import TemplateView, ListView, DetailView
 
 from Insta.models import Post
 """
@@ -11,8 +11,9 @@ class PostView(ListView):
     model = Post
     template_name = "index.html"
 
-
-
+class PostDetailView(DetailView):
+    model = Post
+    template_name = "post_detail.html"
 
 class HelloWorld(TemplateView):
     template_name = 'test.html'

@@ -3,7 +3,11 @@
 <div>
 
     {% for post in object_list %}
-        <img src="/{{post.image}}">
+        <!-- 设立一个anchor，加入http reference，点击之后可以跳转 -->
+        <!-- <a href="/insta/post/{{post.id}}"> -->
+        <a href="{% url 'post_detail' post.id %}">
+            <img src="/{{post.image}}">
+        </a>
     {% endfor %} 
 
 </div>
