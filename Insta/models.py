@@ -22,3 +22,4 @@ class Post(models.Model):
         # 只能return 在app内的path
         # 如果给string，会接在调用url后面，比如/insta/post/new/<add>
         return reverse("post_detail", args=[str(self.id)])
+ 

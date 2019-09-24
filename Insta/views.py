@@ -28,3 +28,8 @@ class PostCreateView(CreateView):
     template_name = "post_create.html"
     # tell user the field they need provide (e.g. titile, image)
     fields = "__all__"
+
+class PostUpdateView(UpdateView):
+    model = Post
+    template_name = "post_update.html"
+    fields = ['title']
