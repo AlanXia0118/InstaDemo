@@ -1,6 +1,11 @@
 {% load static %}
 
 <div>
+    <!-- Anchor for make_post/create -->
+    <a href="{% url 'make_post' %}">Make Post</a>
+</div>
+
+<div>
 
     {% for post in object_list %}
         <!-- 设立一个anchor，加入http reference，点击之后可以跳转 -->

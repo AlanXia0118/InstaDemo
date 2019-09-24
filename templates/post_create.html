@@ -1,0 +1,12 @@
+<h1> New Post </h1>
+<!-- upload image using post method -->
+<!-- multipart: has image and text type -->
+<form action="" method="post" enctype="multipart/form-data">
+    <!-- token for verification -->
+    {% csrf_token %}
+    <!-- form from django.view, call the as_p of form -->
+    <!-- as_p: show each element as paragraph -->
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+</form>
+
