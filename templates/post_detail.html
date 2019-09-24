@@ -2,11 +2,14 @@
     <!-- add update detail function to post_detail page -->
     <!-- use object.id as arg -->
     <a href="{% url 'post_update' object.id%}">Update Post</a>
+    <a href="{% url 'post_delete' object.id%}">Delete Post</a>
 </div>
 
 <!-- 调用django语法显示object的title -->
 <p> {{ object.title }} </p>
 <image src="/{{object.image}}">
 
+
+    
 
 

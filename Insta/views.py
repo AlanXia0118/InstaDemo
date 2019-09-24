@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView, ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse, reverse_lazy
 
 from Insta.models import Post
 """
@@ -33,3 +34,12 @@ class PostUpdateView(UpdateView):
     model = Post
     template_name = "post_update.html"
     fields = ['title']
+
+class PostDeleteView(DeleteView):
+    model = Post
+    # Delete model as well as every field of the model
+    template_name = "post_delete.html"
+    # success_url = reverse("posts")
+    # reverse_lay allows simultaneously do (1)delete (2)render html
+    # allows delete at backend and render html to show
+    success_url = reverse_lazy("posts")
