@@ -1,0 +1,29 @@
+<header>
+        <!-- use ul and li to arrange items like a table -->
+        <ul>
+            {% if request.user.is_authenticated %}
+            <li>
+                <p>Welcome, {{request.user.username}}</p>
+            </li>
+            <li>
+                <a href="{% url 'logout' %}">Logout</a>
+            </li>
+            {% else %}
+            <li>
+                <a href="{% url 'login' %}">Login</a>
+            </li>
+            <li>
+                <a href="{% url 'signup' %}">signup</a>
+            </li>
+            {% endif %}
+        </ul>
+
+
+        <div>
+            <a href="{% url 'make_post' %}">Make Post</a>
+        </div>
+
+</header>
+
+
+

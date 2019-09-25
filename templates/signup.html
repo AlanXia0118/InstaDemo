@@ -1,0 +1,11 @@
+<!-- Using form template -->
+<h1> Sign Up </h1>
+<form method="post">
+    <!-- token for verification -->
+    {% csrf_token %}
+    <!-- form from django.view, call the as_p of form -->
+    <!-- as_p: show each element as paragraph -->
+    {{ form.as_p }}
+    <button type="submit">Sign up</button>
+</form>
+

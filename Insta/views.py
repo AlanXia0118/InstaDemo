@@ -4,6 +4,9 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse, reverse_lazy
 
 from Insta.models import Post
+from django.contrib.auth.forms import UserCreationForm
+
+
 """
 Create your views here.
 """
@@ -19,8 +22,8 @@ class PostDetailView(DetailView):
     model = Post
     template_name = "post_detail.html"
 
-class HelloWorld(TemplateView):
-    template_name = 'test.html'
+class HomeView(TemplateView):
+    template_name = 'home.html'
 
 class PostCreateView(CreateView):
     """ Return form """
@@ -43,3 +46,9 @@ class PostDeleteView(DeleteView):
     # reverse_lay allows simultaneously do (1)delete (2)render html
     # allows delete at backend and render html to show
     success_url = reverse_lazy("posts")
+
+class SignUp(CreateView):
+    # when create user, tell the view which model/form to use
+    form_class = UserCreationForm
+    template_name = 'signup.html'
+    success_url = reverse_lazy("login")
