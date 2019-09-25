@@ -5,6 +5,7 @@ from django.urls import reverse, reverse_lazy
 
 from Insta.models import Post
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 """
@@ -25,13 +26,14 @@ class PostDetailView(DetailView):
 class HomeView(TemplateView):
     template_name = 'home.html'
 
-class PostCreateView(CreateView):
+class PostCreateView(LoginRequiredMixin, CreateView):
     """ Return form """
     model = Post
     # the page creation will be operated
     template_name = "post_create.html"
     # tell user the field they need provide (e.g. titile, image)
     fields = "__all__"
+    login_url = 'login'
 
 class PostUpdateView(UpdateView):
     model = Post
