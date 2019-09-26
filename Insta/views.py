@@ -4,7 +4,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse, reverse_lazy
 
 from Insta.models import Post
-from django.contrib.auth.forms import UserCreationForm
+from Insta.forms import CustomUserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
@@ -51,6 +51,6 @@ class PostDeleteView(DeleteView):
 
 class SignUp(CreateView):
     # when create user, tell the view which model/form to use
-    form_class = UserCreationForm
+    form_class = CustomUserCreationForm
     template_name = 'signup.html'
     success_url = reverse_lazy("login")

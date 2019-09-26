@@ -1,11 +1,23 @@
 from django.db import models
 from imagekit.models import ProcessedImageField
+from django.contrib.auth.models import AbstractUser
 
 from django.urls import reverse
 
 """
 Create your models here.
 """
+class InstaUser(AbstractUser):
+    # except exsiting attrites, add profile_pic to customize the user model
+    profile_pic = ProcessedImageField(
+        upload_to="static/images/profiles",
+        format="JPEG",
+        options={"quality": 100},
+        blank=True,
+        null=True
+    )
+
+
 
 class Post(models.Model):
     # blank = True 不加title可以发出去, null = True 没有title可以发出去

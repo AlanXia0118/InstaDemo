@@ -1,6 +1,6 @@
 <!-- Using form template -->
 <h1> Sign Up </h1>
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     <!-- token for verification -->
     {% csrf_token %}
     <!-- form from django.view, call the as_p of form -->
