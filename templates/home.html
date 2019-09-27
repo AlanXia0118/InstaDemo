@@ -1,9 +1,11 @@
+{% extends 'base.html' %}
 
-<!-- use ul and li to arrange items like a table -->
+{% block content %}
+
 <ul>
     {% if request.user.is_authenticated %}
     <li>
-        <p>Welcome, {{request.user.username}}</p>
+        <p>Hi, {{request.user.username}}</p>
     </li>
     <li>
         <a href="{% url 'logout' %}">Logout</a>
@@ -39,4 +41,5 @@
 
 
 
+{% endblock content %}
 

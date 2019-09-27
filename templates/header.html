@@ -1,0 +1,24 @@
+<div class="navbar navbar-default navbar-fixed-top" id="main-nav">
+        <div class="container desktop">
+            <div class="navbar-header">
+                <a href="/" class="navbar-brand">Mini Insta</a>
+            </div>
+    
+            <div id="navbar-main">
+                <ul class="nav navbar-nav navbar-right">
+                    {% if request.user.is_authenticated %}
+                        <li class="">
+                            <a href="{% url 'make_post' %}">Make Post</a>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a href="{% url 'login' %}">login</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'signup' %}">signup</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>

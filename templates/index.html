@@ -1,5 +1,48 @@
-{% load static %}
-<ul>
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div>
+    <ul>
+        {% if request.user.is_authenticated %}
+        <li>
+            <p>Hi, {{request.user.username}}</p>
+        </li>
+        <li>
+            <a href="{% url 'logout' %}">Logout</a>
+        </li>
+        {% else %}
+        <li>
+            <a href="{% url 'login' %}">Login</a>
+        </li>
+        <li>
+            <a href="{% url 'signup' %}">signup</a>
+        </li>
+        {% endif %}
+    </ul>
+</div>
+
+
+<div>
+    <a href="{% url 'make_post' %}"> Make Post</a>
+</div>
+
+
+<div>
+    {% for post in object_list %}
+        <!-- 设立一个anchor，加入http reference，点击之后可以跳转 -->
+        <!-- <a href="/insta/post/{{post.id}}"> -->
+        <a href="{% url 'post_detail' post.id %}">
+            <img src="/{{post.image}}">
+        </a>
+    {% endfor %} 
+</div>
+
+{% endblock content %}
+
+
+
+<!-- <ul>
     {% if request.user.is_authenticated %}
         <li>
             <p>Hi, {{request.user.username}}</p>
@@ -15,26 +58,18 @@
             <a href="{% url 'signup' %}">Signup</a>
         </li>
     {% endif %}
-</ul>
+</ul> -->
 
 
-<div>
+<!-- <div> -->
     <!-- Anchor for make_post/create -->
-    <a href="{% url 'make_post' %}">Make Post</a>
-</div>
+    <!-- <a href="{% url 'make_post' %}">Make Post</a> -->
+<!-- </div> -->
 
 
-<div>
 
-    {% for post in object_list %}
-        <!-- 设立一个anchor，加入http reference，点击之后可以跳转 -->
-        <!-- <a href="/insta/post/{{post.id}}"> -->
-        <a href="{% url 'post_detail' post.id %}">
-            <img src="/{{post.image}}">
-        </a>
-    {% endfor %} 
 
-</div>
+
 
 
 
