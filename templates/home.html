@@ -1,45 +1,48 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
 {% block content %}
 
-<ul>
-    {% if request.user.is_authenticated %}
-    <li>
-        <p>Hi, {{request.user.username}}</p>
-    </li>
-    <li>
-        <a href="{% url 'logout' %}">Logout</a>
-    </li>
-    {% else %}
-    <li>
-        <a href="{% url 'login' %}">Login</a>
-    </li>
-    <li>
-        <a href="{% url 'signup' %}">signup</a>
-    </li>
-    {% endif %}
-</ul>
-
-
-<div>
-    <a href="{% url 'make_post' %}">Make Post</a>
+<div class="cards-listing">
+    {% for post in object_list %}
+        <div class="row">
+            <div class="card view-update {{ post.pk }}">
+                <div class="card__panel-head">
+                    <div class="poster__info">
+                        <a href="/" class="poster__name">
+                            {% if post.author.profile_pic %}
+                                <img class="poster__profilepic" src="{{ post.author.profile_pic.url }}">
+                            {% endif %}
+                            {{ post.author.username }}
+                        </a>
+                        <span class="poster__timestamp">
+                            {{ post.posted_on|timesince }}
+                        </span>
+                    </div>
+                </div>
+                <a href="{% url 'post' post.pk %}">
+                    <img class="card__main-image" src="{{ post.image.url }}">
+                </a>
+                <div class="card__panel-body">
+                    <div class="likes">
+                        {% if post.get_like_count %}
+                            {{ post.get_like_count }} like{% if post.get_like_count > 1 %}s{% endif %}
+                        {% endif %}
+                    </div>
+                    <ul class="comment-list">
+                        <a class="view-more"></a>
+                        {% for comment in post.comments.all %}
+                        <li class="comment-list__comment">
+                            <a href="{% url 'profile' comment.user.pk %}" class="user">
+                                {{ comment.user.username }}
+                            </a>
+                            <span class="comment">{{ comment.comment }}</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
 </div>
-
-
-
-<div>
-
-        {% for post in object_list %}
-            <!-- 设立一个anchor，加入http reference，点击之后可以跳转 -->
-            <!-- <a href="/insta/post/{{post.id}}"> -->
-            <a href="{% url 'post_detail' post.id %}">
-                <img src="/{{post.image}}">
-            </a>
-        {% endfor %} 
-    
-</div>
-
-
 
 {% endblock content %}
-

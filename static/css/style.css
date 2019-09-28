@@ -39,7 +39,7 @@ a:hover {
   text-decoration: none; }
 
 .content-wrapper {
-  margin-top: 57px;
+  margin-top: 75px;
   margin-bottom: 60px;
   background-color: #fafafa; }
   @media screen and (max-width: 768px) {
@@ -242,7 +242,7 @@ a:hover {
   cursor: pointer; }
 
 .cards-listing {
-  max-width: 600px;
+  max-width: 800px;
   width: 100%;
   margin: 20px auto; }
 

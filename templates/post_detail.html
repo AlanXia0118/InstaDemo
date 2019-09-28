@@ -2,36 +2,45 @@
 
 {% block content %}
 
-<div>
-    <ul>
-        {% if request.user.is_authenticated %}
-        <li>
-            <p>Hi, {{request.user.username}}</p>
-        </li>
-        <li>
-            <a href="{% url 'logout' %}">Logout</a>
-        </li>
-        {% else %}
-        <li>
-            <a href="{% url 'login' %}">Login</a>
-        </li>
-        <li>
-            <a href="{% url 'signup' %}">signup</a>
-        </li>
-        {% endif %}
-    </ul>
-</div>
-
-<div>
-    <!-- add update detail function to post_detail page -->
-    <!-- use object.id as arg -->
-    <a class="update-post" href="{% url 'post_update' object.id%}">Update Post</a>
-    <a href="{% url 'post_delete' object.id%}">Delete Post</a>
-</div>
-
-<!-- 调用django语法显示object的title -->
-<p> {{ object.title }} </p>
-<image src="/{{object.image}}">
+<div class="row single-post">
+        <div class="single-post-card view-update {{ object.pk }}">
+            <div class="header">
+                <a href="/">
+                    {% if object.author.profile_pic %}
+                        <img class="picture-circle--medium" src="http://{{ request.META.HTTP_HOST }}/{{object.author.profile_pic.url}}">
+                    {% endif %}
+                    {{ object.author.username }}
+                </a>
+            </div>
+            <div class="image__wrapper">
+                <img class="card__main-image" src="http://{{ request.META.HTTP_HOST }}/{{object.image.url}}" width='1000', height='1000'>
+            </div>
+            <div class="comments-portion">
+                <div class="likes-timestamp-row">
+                    <div class="likes">
+                        {% if object.get_like_count %}
+                            {{ object.get_like_count }} like{% if object.get_like_count > 1 %}s{% endif %}
+                        {% endif %}
+                    </div>
+                    <div class="timestamp">
+                        {{ object.posted_on|timesince }}
+                    </div>
+                </div>
+                <ul class="comment-list">
+                    {% for comment in object.comments.all %}
+                    <li class="comment-list__comment">
+                        <a href="/" class="user">
+                            {{ comment.user.username }}
+                        </a>
+                        <span class="comment">{{ comment.comment }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+                <!--  -->
+            </div>
+        </div>
+    </div>
+    
 
 
 {% endblock content %}

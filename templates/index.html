@@ -1,83 +1,30 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
 {% block content %}
 
-<div>
-    <ul>
-        {% if request.user.is_authenticated %}
-        <li>
-            <p>Hi, {{request.user.username}}</p>
-        </li>
-        <li>
-            <a href="{% url 'logout' %}">Logout</a>
-        </li>
-        {% else %}
-        <li>
-            <a href="{% url 'login' %}">Login</a>
-        </li>
-        <li>
-            <a href="{% url 'signup' %}">signup</a>
-        </li>
-        {% endif %}
-    </ul>
-</div>
-
-
-<div>
-    <a href="{% url 'make_post' %}"> Make Post</a>
-</div>
-
-
-<div>
+<div class="cards-listing">
     {% for post in object_list %}
-        <!-- 设立一个anchor，加入http reference，点击之后可以跳转 -->
-        <!-- <a href="/insta/post/{{post.id}}"> -->
-        <a href="{% url 'post_detail' post.id %}">
-            <img src="/{{post.image}}">
-        </a>
-    {% endfor %} 
+        <div class="row">
+            <div class="card view-update {{ post.pk }}">
+                <div class="card__panel-head">
+                    <div class="poster__info">
+                        <a href="/" class="poster__name">
+                            {% if post.author.profile_pic %}
+                                <img class="poster__profilepic" src="{{ post.author.profile_pic.url }}">
+                            {% endif %}
+                            {{ post.author.username }}
+                        </a>
+                        <span class="poster__timestamp">
+                            {{ post.posted_on|timesince }}
+                        </span>
+                    </div>
+                </div>
+                <a href="{% url 'post' post.pk %}">
+                    <img class="card__main-image" src="{{ post.image.url }}">
+                </a>
+            </div>
+        </div>
+    {% endfor %}
 </div>
 
 {% endblock content %}
-
-
-
-<!-- <ul>
-    {% if request.user.is_authenticated %}
-        <li>
-            <p>Hi, {{request.user.username}}</p>
-        </li>
-        <li>
-            <a href="{% url 'logout' %}">Logout</a>
-        </li>
-    {% else %}
-        <li>
-            <a href="{% url 'login' %}">Login</a>
-        </li>
-        <li>
-            <a href="{% url 'signup' %}">Signup</a>
-        </li>
-    {% endif %}
-</ul> -->
-
-
-<!-- <div> -->
-    <!-- Anchor for make_post/create -->
-    <!-- <a href="{% url 'make_post' %}">Make Post</a> -->
-<!-- </div> -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 

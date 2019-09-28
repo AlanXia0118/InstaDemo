@@ -3,41 +3,46 @@ from django.views.generic import TemplateView, ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse, reverse_lazy
 
-from Insta.models import Post
+# from Insta.models import UserConnection
 from Insta.forms import CustomUserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
+from .models import InstaUser, Post, Like, Comment
 
 
 """
 Create your views here.
 """
 
-class PostView(ListView):
-    """ Return object_list """
+class IndexView(ListView):
+    """ For people doesn't login """
     # 需要@Override的属性
     model = Post
     template_name = "index.html"
 
+class PostListView(LoginRequiredMixin, ListView):
+    model = Post
+    template_name = "home.html"
+    login_url = "login"
+
 class PostDetailView(DetailView):
+# class PostDetailView(LoginRequiredMixin, DetailView):
     """ Return object """
     model = Post
     template_name = "post_detail.html"
-
-class HomeView(TemplateView):
-    template_name = 'home.html'
+    # login_url = "login"
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     """ Return form """
     model = Post
     # the page creation will be operated
-    template_name = "post_create.html"
+    template_name = "make_post.html"
     # tell user the field they need provide (e.g. titile, image)
     fields = "__all__"
     login_url = 'login'
 
 class PostUpdateView(UpdateView):
     model = Post
-    template_name = "post_update.html"
+    template_name = "post_edit.html"
     fields = ['title']
 
 class PostDeleteView(DeleteView):
@@ -47,10 +52,16 @@ class PostDeleteView(DeleteView):
     # success_url = reverse("posts")
     # reverse_lay allows simultaneously do (1)delete (2)render html
     # allows delete at backend and render html to show
-    success_url = reverse_lazy("posts")
+    success_url = reverse_lazy("home")
 
 class SignUp(CreateView):
     # when create user, tell the view which model/form to use
     form_class = CustomUserCreationForm
     template_name = 'signup.html'
     success_url = reverse_lazy("login")
+
+
+class UserProfile(LoginRequiredMixin, DetailView):
+    model = InstaUser
+    template_name = "user_profile.html"
+    login_url= "login"

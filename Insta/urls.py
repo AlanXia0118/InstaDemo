@@ -15,16 +15,17 @@ Including another URLconf
 """  
 from django.contrib import admin
 from django.urls import path, include
-
-from Insta.views import HomeView
-from Insta.views import (PostView, PostDetailView, PostCreateView, 
-                         PostUpdateView, PostDeleteView)
+from Insta.views import (PostListView, PostDetailView, PostCreateView, 
+                         PostUpdateView, PostDeleteView, SignUp, UserProfile,
+                         IndexView)
 
 urlpatterns = [
-    path('', HomeView.as_view(), name='home'),  
-    path('posts/', PostView.as_view(), name='posts'),
-    path('post/<int:pk>', PostDetailView.as_view(), name='post_detail'),
+    path('', PostListView.as_view(), name='home'),  
+    path('welcome', IndexView.as_view(), name='index'),
+    path('post/<int:pk>', PostDetailView.as_view(), name='post'),
     path('post/new/', PostCreateView.as_view(), name="make_post"),
-    path('post/update/<int:pk>', PostUpdateView.as_view(), name='post_update'),
-    path('post/delete/<int:pk>', PostDeleteView.as_view(), name='post_delete'),
+    path('post/edit/<int:pk>', PostUpdateView.as_view(), name='edit_post'),
+    path('post/delete/<int:pk>', PostDeleteView.as_view(), name='delete_post'),
+    path('user_profile/<int:pk>', UserProfile.as_view(), name='profile'),
+    path('auth/signup', SignUp.as_view(), name='signup')
 ]
