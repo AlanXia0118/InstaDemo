@@ -4,21 +4,22 @@
 
 
 <h1> New Post </h1>
+
 <!-- upload image using post method -->
 <!-- multipart: has image and text type -->
 <form action="" method="post" enctype="multipart/form-data">
-    <!-- token for verification -->
     {% csrf_token %}
-    <!-- form from django.view, call the as_p of form -->
-    <!-- as_p: show each element as paragraph -->
-    
-    {{form.as_p}}
-
-    <!-- <label for="id_title">Title: </label>   
-    <textarea name="title" rows="10" id="id_title" cols="40"></textarea> > 
-    <label for="id_image">Image: </label>   
-    <textarea name="title" rows="10" id="id_title" cols="40"></textarea> >  -->
-
+    <!-- {{form.as_p}} -->
+    <p>
+        <label for="id_title"></label>
+        <textarea class="form-control" name="title" id="id_title" cols="10" rows="4"  placeholder="What's on your mind..."></textarea>
+    </p>
+    <p>
+        <label for="id_image"></label>
+        <input type="file" name="image" id="id_image" required>
+        <!-- <input type="file" id="id_image" name="image" class="file-upload-field" value=""> -->
+        <!-- <label for="id_image" class="btn-2">upload</label> -->
+    </p>
 
     <button class="btn btn-primary" type="submit">Save</button>
 </form>

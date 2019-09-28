@@ -70,21 +70,39 @@ class UserProfile(LoginRequiredMixin, DetailView):
 
 
 """ To fix make_post bug."""
+from django.http import HttpResponseRedirect
 class CreatePostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ('title', 'image')
 
 
-from django.http import HttpResponseRedirect
+
 def create_post(request):
     form = CreatePostForm(request.POST, request.FILES)
-    if form.is_valid():
-        author = request.user
-        title = form.cleaned_data.get('title')
-        image = form.cleaned_data.get('image')
-        # print(type(image))
-        if image is not None:
+    if request.method == "GET":
+        print("-------------make post")
+        return render(request, "../templates/make_post.html", {'form': form})
+    elif request.method == "POST":
+        print("-------------upload post")
+        if form.is_valid():
+            author = request.user
+            title = form.cleaned_data.get('title')
+            image = form.cleaned_data.get('image')
+            # print(type(image))
             post = Post.objects.create(author=author, title=title, image=image)
-            return HttpResponseRedirect("/")
-    return render(request, '../templates/make_post.html', {'form': form})
+    return HttpResponseRedirect("/")
+
+# def create_post(request):
+#     form = CreatePostForm(request.POST, request.FILES)
+#     if form.is_valid():
+#         author = request.user
+#         title = form.cleaned_data.get('title')
+#         image = form.cleaned_data.get('image')
+#         # print(type(image))
+#         if image is not None:
+#             post = Post.objects.create(author=author, title=title, image=image)
+#             return HttpResponseRedirect("/")
+#     return render(request, '../templates/make_post.html', {'form': form})
+
+
