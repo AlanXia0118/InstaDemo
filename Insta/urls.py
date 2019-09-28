@@ -18,12 +18,14 @@ from django.urls import path, include
 from Insta.views import (PostListView, PostDetailView, PostCreateView, 
                          PostUpdateView, PostDeleteView, SignUp, UserProfile,
                          IndexView)
+from Insta.views import create_post
 
 urlpatterns = [
     path('', PostListView.as_view(), name='home'),  
     path('welcome', IndexView.as_view(), name='index'),
     path('post/<int:pk>', PostDetailView.as_view(), name='post'),
-    path('post/new/', PostCreateView.as_view(), name="make_post"),
+    # path('post/new/', PostCreateView.as_view(), name="make_post"),
+    path('post/new/', create_post, name="make_post"),    
     path('post/edit/<int:pk>', PostUpdateView.as_view(), name='edit_post'),
     path('post/delete/<int:pk>', PostDeleteView.as_view(), name='delete_post'),
     path('user_profile/<int:pk>', UserProfile.as_view(), name='profile'),

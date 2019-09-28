@@ -14,17 +14,17 @@ class InstaUser(AbstractUser):
         blank=True,
         )
 
-    # def get_connections(self):
-    #     connections = UserConnection.objects.filter(creator=self)
-    #     return connections
+    def get_connections(self):
+        connections = UserConnection.objects.filter(creator=self)
+        return connections
 
-    # def get_followers(self):
-    #     followers = UserConnection.objects.filter(following=self)
-    #     return followers
+    def get_followers(self):
+        followers = UserConnection.objects.filter(following=self)
+        return followers
 
-    # def is_followed_by(self, user):
-    #     followers = UserConnection.objects.filter(following=self)
-    #     return followers.filter(creator=user).exists()
+    def is_followed_by(self, user):
+        followers = UserConnection.objects.filter(following=self)
+        return followers.filter(creator=user).exists()
 
     def get_absolute_url(self):
         return reverse('profile', args=[str(self.id)])
@@ -32,20 +32,21 @@ class InstaUser(AbstractUser):
     def __str__(self):
         return self.username
 
+class UserConnection(models.Model):
+    created = models.DateTimeField(auto_now_add=True, editable=False)
+    # creator follows "following"
+    creator = models.ForeignKey(
+        InstaUser,
+        # when the object is deleted, also delete the objectes have reference to it
+        on_delete=models.CASCADE,
+        related_name="friendship_creator_set")
+    following = models.ForeignKey(
+        InstaUser,
+        on_delete=models.CASCADE,
+        related_name="friend_set")
 
-# class UserConnection(models.Model):
-#     created = models.DateTimeField(auto_now_add=True, editable=False)
-#     creator = models.ForeignKey(
-#         InstaUser,
-#         on_delete=models.CASCADE,
-#         related_name="friendship_creator_set")
-#     following = models.ForeignKey(
-#         InstaUser,
-#         on_delete=models.CASCADE,
-#         related_name="friend_set")
-
-#     def __str__(self):
-#         return self.creator.username + ' follows ' + self.following.username
+    def __str__(self):
+        return self.creator.username + ' follows ' + self.following.username
 
 class Post(models.Model):
     author = models.ForeignKey( # a foreign key indicate a Many-To-One relationship

@@ -2,7 +2,7 @@
         <div class="container desktop">
             {% if request.user.is_authenticated %}
                 <div class="navbar-header">
-                    <a href="/" class="navbar-brand">Homepage</a>
+                    <a href="/" class="navbar-brand">{{request.user.username}}</a>
                 </div>    
             {% else %}
                 <div class="navbar-header">

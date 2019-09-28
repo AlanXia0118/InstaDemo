@@ -7,6 +7,7 @@ from django.urls import reverse, reverse_lazy
 from Insta.forms import CustomUserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import InstaUser, Post, Like, Comment
+from django import forms
 
 
 """
@@ -65,3 +66,25 @@ class UserProfile(LoginRequiredMixin, DetailView):
     model = InstaUser
     template_name = "user_profile.html"
     login_url= "login"
+
+
+
+""" To fix make_post bug."""
+class CreatePostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ('title', 'image')
+
+
+from django.http import HttpResponseRedirect
+def create_post(request):
+    form = CreatePostForm(request.POST, request.FILES)
+    if form.is_valid():
+        author = request.user
+        title = form.cleaned_data.get('title')
+        image = form.cleaned_data.get('image')
+        # print(type(image))
+        if image is not None:
+            post = Post.objects.create(author=author, title=title, image=image)
+            return HttpResponseRedirect("/")
+    return render(request, '../templates/make_post.html', {'form': form})
