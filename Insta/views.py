@@ -69,6 +69,22 @@ class UserProfile(LoginRequiredMixin, DetailView):
     login_url= "login"
 
 
+class ExploreView(LoginRequiredMixin, ListView):
+    model = Post
+    template_name = 'explore.html'
+    login_url = 'login'
+
+    def get_queryset(self):
+        return Post.objects.all().order_by('-posted_on')[:20]
+
+
+class EditProfile(LoginRequiredMixin, UpdateView):
+    model = InstaUser
+    template_name = 'edit_profile.html'
+    fields = ['profile_pic', 'username']
+    login_url = 'login'
+
+
 
 """ To fix make_post bug."""
 from django.http import HttpResponseRedirect
