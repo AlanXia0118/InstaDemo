@@ -18,7 +18,7 @@ from django.urls import path, include
 from Insta.views import (PostListView, PostDetailView, PostCreateView, 
                          PostUpdateView, PostDeleteView, SignUp, UserProfile,
                          IndexView)
-from Insta.views import create_post
+from Insta.views import create_post, addLike
 
 urlpatterns = [
     path('', PostListView.as_view(), name='home'),  
@@ -29,5 +29,6 @@ urlpatterns = [
     path('post/edit/<int:pk>', PostUpdateView.as_view(), name='edit_post'),
     path('post/delete/<int:pk>', PostDeleteView.as_view(), name='delete_post'),
     path('user_profile/<int:pk>', UserProfile.as_view(), name='profile'),
-    path('auth/signup', SignUp.as_view(), name='signup')
+    path('auth/signup', SignUp.as_view(), name='signup'),
+    path('like', addLike, name='addLike')
 ]

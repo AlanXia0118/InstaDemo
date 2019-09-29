@@ -96,6 +96,7 @@ class Like(models.Model):
     user = models.ForeignKey(InstaUser, on_delete=models.CASCADE)
 
     class Meta:
+        # a user can only like a post once
         unique_together = ("post", "user")
 
     def __str__(self):

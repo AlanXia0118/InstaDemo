@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView, ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse, reverse_lazy
+from annoying.decorators import ajax_request
 
 # from Insta.models import UserConnection
 from Insta.forms import CustomUserCreationForm
@@ -93,16 +94,28 @@ def create_post(request):
             post = Post.objects.create(author=author, title=title, image=image)
     return HttpResponseRedirect("/")
 
-# def create_post(request):
-#     form = CreatePostForm(request.POST, request.FILES)
-#     if form.is_valid():
-#         author = request.user
-#         title = form.cleaned_data.get('title')
-#         image = form.cleaned_data.get('image')
-#         # print(type(image))
-#         if image is not None:
-#             post = Post.objects.create(author=author, title=title, image=image)
-#             return HttpResponseRedirect("/")
-#     return render(request, '../templates/make_post.html', {'form': form})
+
+
+# annotation means the function specially responses to ajax operations
+@ajax_request
+def addLike(request):
+    post_pk = request.POST.get('post_pk')
+    post = Post.objects.get(pk=post_pk)
+    try:
+        like = Like(post=post, user=request.user)
+        # save like object to database
+        like.save()
+        result = 1
+    except Exception as e:
+        # if the user has liked the post, means cancel -> delete it
+        like = Like.objects.get(post=post, user=request.user)
+        like.delete()
+        result = 0
+
+    return {
+        'result': result,
+        'post_pk': post_pk
+    }
+
 
 
