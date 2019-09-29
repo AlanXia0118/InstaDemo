@@ -7,12 +7,15 @@
 <div class="row single-post">
         <div class="single-post-card view-update {{ object.pk }}">
             <div class="header">
-                <a href="/">
+                <a href="{% url 'profile' object.author.pk %}">
                     {% if object.author.profile_pic %}
                         <img class="picture-circle--medium" src="http://{{ request.META.HTTP_HOST }}/{{object.author.profile_pic.url}}">
                     {% endif %}
                     {{ object.author.username }}
                 </a>
+                <div style='position:absolute; z-index:999; top:100; font-size: 17;'>
+                        {{object.title}}                    
+                </div>
             </div>
             <div class="image__wrapper">
                 <img class="card__main-image" src="http://{{ request.META.HTTP_HOST }}/{{object.image.url}}" width='1000', height='1000'>
@@ -31,7 +34,7 @@
                 <ul class="comment-list">
                     {% for comment in object.comments.all %}
                     <li class="comment-list__comment">
-                        <a href="/" class="user">
+                        <a href="{% url 'profile' comment.user.pk %}" class="user">
                             {{ comment.user.username }}
                         </a>
                         <span class="comment">{{ comment.comment }}</span>

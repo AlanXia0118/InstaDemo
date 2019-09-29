@@ -74,6 +74,7 @@ class ExploreView(LoginRequiredMixin, ListView):
     template_name = 'explore.html'
     login_url = 'login'
 
+    # to override the original get_queryset func, don't take all
     def get_queryset(self):
         return Post.objects.all().order_by('-posted_on')[:20]
 
