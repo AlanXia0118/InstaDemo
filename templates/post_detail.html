@@ -13,9 +13,11 @@
                     {% endif %}
                     {{ object.author.username }}
                 </a>
+
                 <div style='position:absolute; z-index:999; top:100; font-size: 17;'>
-                        {{object.title}}                    
+                        {{object.title}}  
                 </div>
+
             </div>
             <div class="image__wrapper">
                 <img class="card__main-image" src="http://{{ request.META.HTTP_HOST }}/{{object.image.url}}" width='1000', height='1000'>
@@ -49,10 +51,30 @@
                     <div class="hidden-data {{ object.pk }}" style="display: none;">
                         <span class="post-pk">{{ object.pk }}</span>
                     </div>
-                </section>        
+                </section>       
+
+                <div style='position:absolute; z-index:999; left:35; top:50; font-size: 17;'>
+                    {% if user == object.author %}   
+                        <div class="profile">
+                            <div class="profile__head">
+                                <a class="edit-desktop" href="{% url 'edit_post' object.pk %}">
+                                    <button class="edit-profile">Update </button>
+                                </a>
+                                <span>      </span>
+                                <a class="edit-desktop" href="{% url 'delete_post' object.pk %}">
+                                    <button class="edit-profile">Delete </button>
+                                </a>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+
             </div>
         </div>
     </div>
+
+
+
     
 
 
