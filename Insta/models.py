@@ -22,6 +22,7 @@ class InstaUser(AbstractUser):
         followers = UserConnection.objects.filter(following=self)
         return followers
 
+    # check if user was following the one
     def is_followed_by(self, user):
         followers = UserConnection.objects.filter(following=self)
         return followers.filter(creator=user).exists()
