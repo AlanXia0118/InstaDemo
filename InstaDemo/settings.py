@@ -132,4 +132,10 @@ LOGIN_REDIRECT_URL = "home"
 
 LOGOUT_REDIRECT_URL = "index"
 
-AUTH_USER_MODEL = 'Insta.InstaUser'
+AUTH_USER_MODEL = "Insta.InstaUser"
+
+
+# For whitenoise app
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
