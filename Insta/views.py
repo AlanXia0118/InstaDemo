@@ -26,6 +26,9 @@ class PostListView(LoginRequiredMixin, ListView):
     template_name = "home.html"
     login_url = "login"
 
+    def get_queryset(self):
+        return Post.objects.all()[::-1]
+
 class PostDetailView(DetailView):
 # class PostDetailView(LoginRequiredMixin, DetailView):
     """ Return object """

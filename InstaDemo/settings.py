@@ -136,6 +136,6 @@ AUTH_USER_MODEL = "Insta.InstaUser"
 
 
 # For whitenoise app
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') # path to put whilenoise generated file
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
