@@ -3,17 +3,37 @@
 {% block content %}
 
 
-
-
-<h1> Delete Post </h1>
 <form action="" method="post" enctype="multipart/form-data">
     <!-- token for verification -->
     {% csrf_token %}
     <!-- use form to serve -->
     <!-- no need to show paragraph -->
     <!-- {{ form.as_p }} -->
-    <p>Do you want to delete "{{post.title}}" ?</p>
-    <button type="submit" class="btn btn-primary">Confirm delete</button>
+    <p>
+        <h2 style="text-align: center;">Wanna delete "{{post.title}}"?</h2>
+    </p>
+
+    <div class="cards-listing" style="position: relative; top:30">
+        <div class="row">
+            <div class="card view-update {{ post.pk }}">
+                <a href="{% url 'post' post.pk %}">
+                    <img height="400" class="card__main-image" src="/{{ post.image.url }}">
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- <button style="position: relative; left: 45%; right: 50%;" type="submit" class="btn btn-primary">Confirm delete</button> -->
+
+    <p class="profile">
+        <div class="profile__head" style="position: relative; left: 40%; top: -50;">
+            <a class="edit-desktop">
+                <button class="edit-profile" type="submit">Confirm Delete </button>
+            </a>
+        </div>
+    </p>
+
+
+
 </form>
 
 {% endblock content %}

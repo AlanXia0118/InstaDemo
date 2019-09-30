@@ -5,7 +5,6 @@
 {% block content %}
 
 <div class="profile">
-
     <div class="profile__head">
         <div class="row">
             <div class="col-xs-4 left">
@@ -37,8 +36,12 @@
                 <div>
                     <ul class="stats">
                         <div class="col-xs-4"><li class="stats__count"><span>{{ object.posts.count }}</span><br> posts</li></div>
-                        <div class="col-xs-4"><a href="/" style="text-decoration: none; color: black;"><li class="stats__count"><span class="follower_count" id="follower_id">{{ object.get_followers.count }}</span><br> followers</li></a></div>
-                        <div class="col-xs-4"><a href="/" style="text-decoration: none; color: black;"><li class="stats__count"><span>{{ object.get_connections.count }}</span><br> following</li></a></div>
+                        <div class="col-xs-4"><li style="text-decoration: none; color: black;" class="stats__count"><span class="follower_count" id="follower_id">{{ object.get_followers.count }}</span><br> followers</li></div>
+                        <div class="col-xs-4"><li class="stats__count"><span>{{ object.get_connections.count }}</span><br> following</li></div>
+
+
+
+                        <!-- <div class="col-xs-4"><a style="text-decoration: none; color: black;"><li class="stats__count"><span>{{ object.get_connections.count }}</span><br> following</li></a></div> -->
                     </ul>
                 </div>
             </div>

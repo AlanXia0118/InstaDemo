@@ -3,27 +3,51 @@
 {% block content %}
 
 
-<h1> New Post </h1>
+<h1 style="text-align: center"> Here to start your new post. </h1>
 
 <!-- upload image using post method -->
 <!-- multipart: has image and text type -->
-<form action="" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <!-- {{form.as_p}} -->
-    <p>
-        <label for="id_title"></label>
-        <textarea class="form-control" name="title" id="id_title" cols="10" rows="4"  placeholder="What's on your mind..."></textarea>
-    </p>
-    <p>
-        <label for="id_image"></label>
-        <input type="file" name="image" id="id_image" required>
-        <!-- <input type="file" id="id_image" name="image" class="file-upload-field" value=""> -->
-        <!-- <label for="id_image" class="btn-2">upload</label> -->
-    </p>
 
-    <button class="btn btn-primary" type="submit">Save</button>
 
-</form>
+
+<div class="row profile-settings">
+    <div class="col-xs-12">
+    
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <!-- {{ form.as_p }} -->
+            <div class="profile">
+                <div class="profile__head">
+                    <div class="row">
+                        <div class="col-xs-4 left" style="position: relative; top:50;">
+                            <h1> Image </h1>
+                            <img width="200" height="200" style="position: relative; top: 30" class="picture-circle" id="output">
+                            <input style="position: relative; top: 50;" type="file" name="image" id="id_image" onchange="myLoadFile(event)">
+                        </div>
+    
+                        <div class="col-xs-8 right" style="position: relative; left:150; top:50">
+                            <h1 style="position:relative; left:140;"> Title</h1>
+                            <!-- <textarea class="form-control"></textarea> -->
+                            <textarea style="position:relative; top:40; font-size: 15" class="form-control" name="title" id="id_title" cols="20" rows="7"  placeholder="What's on your mind..."></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <p class="profile">
+                <div class="profile__head" style="position: relative; left: 35%; top: 120;">
+                    <a class="edit-desktop">
+                        <button class="edit-profile" type="submit">Make Post </button>
+                    </a>
+                </div>
+            </p>
+    
+    
+    
+        </form>
+    </div>
+</div>
+
 
 
 {% endblock content %}

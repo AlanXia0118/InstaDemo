@@ -1,19 +1,86 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<h1 style="position: relative; top:60; text-align: center"> Sign up to find more. </h1>
+
+
+<div style="position: relative; top:30;" class="row profile-settings">
+        <div class="col-xs-12">
+      
+          <form action="" method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              <!-- {{ form.as_p }} -->
+              <div class="profile">
+                  <div class="profile__head">
+                      <div class="row">
+                          <div class="col-xs-4 left" style="position: relative; top:50;">
+                            <h2> Profile Photo </h2>
+                            <img style="position: relative; top: 40" class="picture-circle" id="output">
+                            <input style="position: relative; top: 80;" type="file" name="profile_pic" id="id_profile_pic" onchange="myLoadFile(event)">
+                          </div>
+                          <div class="col-xs-8" style="position: relative; top:50; left:250;"> 
+                                <h2> Profile Info</h2>
+                          </div>
+
+                          <div class="col-xs-4 right" style="position: relative; left:150; top:50">
+                              <!-- <textarea class="form-control"></textarea> -->
+                              <input style="position:relative; top:80; font-size: 17" type="text" 
+                                    class="form-control" name="username" id="id_username"
+                                    placeholder="Username" autofocus required>
+                              <input style="position:relative; top:160; font-size: 17" type="email" 
+                                    class="form-control" name="email" id="id_email"
+                                    placeholder="Email" autofocus required>
+                          </div>
+
+                          <div class="col-xs-4 right" style="position: relative; left:150; top:50">
+                                <!-- <textarea class="form-control"></textarea> -->
+                                <input style="position:relative; top:80; font-size: 17" type="password" 
+                                      class="form-control" name="password1" id="id_password1"
+                                      placeholder="Password" autofocus required>
+
+                                <input style="position:relative; top:160; font-size: 17" type="password" 
+                                      class="form-control" name="password2" id="id_password2"
+                                      placeholder="Confirm Password" autofocus required>
+                            </div>
+                      </div>
+                  </div>
+              </div>
+      
+              <p class="profile">
+                  <div class="profile__head" style="position: relative; left: 45%; top: 130;">
+                      <a class="edit-desktop">
+                          <button class="edit-profile" type="submit">Signup </button>
+                      </a>
+                  </div>
+              </p>
+      
+      
+      
+          </form>
+        </div>
+      </div>
 
 
 
 
-<!-- Using form template -->
-<!-- <h1> Sign Up </h1> -->
-<form method="post" enctype="multipart/form-data">
-    <!-- token for verification -->
-    {% csrf_token %}
-    <!-- form from django.view, call the as_p of form -->
-    <!-- as_p: show each element as paragraph -->
-    {{ form.as_p }}
-    <button class="btn btn-primary" type="submit">Sign up</button>
-</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 {% endblock content %}

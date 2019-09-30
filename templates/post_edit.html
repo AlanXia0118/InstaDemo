@@ -5,14 +5,49 @@
 
 
 
-<h1> Edit Post </h1>
-<form action="" method="post" enctype="multipart/form-data">
+<h1 style="text-align: center"> Time to edit your post. </h1>
+<form style="position: relative; top:30" action="" method="post" enctype="multipart/form-data">
     <!-- token for verification -->
     {% csrf_token %}
     <!-- use form to serve -->
     <!-- will only show paragraph defined in PostUpdateView.fields -->
-    {{ form.as_p }}
-    <button type="submit">Update</button>
+
+
+    <div class="cards-listing">
+        <div class="row">
+            <div class="card view-update {{ post.pk }}">
+                <a href="{% url 'post' post.pk %}">
+                    <img class="card__main-image" src="/{{ post.image.url }}">
+                </a>
+                <div class="card__panel-body">
+                    <section class="input-row">
+                        <div class="comment-input-wrapper">
+                            <label for="id_title"></label>
+                            <input type="text" for="id_title" name="title" placeholder="Update the post here...">
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- <p>
+        <label for="id_title"></label>
+        <textarea style="position:relative; font-size: 20" class="form-control" name="title" id="id_title" cols="10" rows="8"  placeholder="Don't type too much because nobody wants to know...">{{post.title}}</textarea>
+    </p> -->
+
+    <p class="profile">
+        <div class="profile__head" style="position: relative; left: 42%; top:-110;">
+            <a class="edit-desktop">
+                <button class="edit-profile" type="submit">Update </button>
+            </a>
+        </div>
+    </p>
+
+
+
+
 </form>
 
 {% endblock content %}
